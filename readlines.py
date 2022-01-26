@@ -118,7 +118,7 @@ class CreateMailLists:
         
         
         c1 = self.parse_kitsap()
-        rows = pcursor.execute("SELECT city FROM kitsap").fetchall()
+        rows = kcursor.execute("SELECT city FROM kitsap").fetchall()
         cityList = []
         for row in rows:
             cityList.append(row)
