@@ -1,0 +1,50 @@
+version: "3.3"
+
+services:
+  # db:
+  #   image: mongo:4.4
+  #   networks:
+  #     - maillist
+  #   ports:
+  #     - 27017:27017
+
+  maillist:
+    image: maillist:1.3
+    build: .
+    networks:
+      - maillist
+    ports:
+      - 7070:7070
+    volumes:
+      - maillistvol:/home
+      # - maillistbackupvol:/usr/share/Ampnado/AmpBackup
+      # - maillistpicvol:/usr/share/Ampnado/static/images/thumbnails
+    # depends_on:
+    #   - db
+
+networks:
+  maillist:
+
+volumes:
+  maillistvol:
+    driver: local
+    driver_opts:
+      type: none
+#THIS NEEDS TO BE CHANGE TO THE CORRECT PATH ON THE PI
+      device: /home/charliepi/Documents/
+      o: bind
+
+#   maillistbackupvol:
+#     driver: local
+#     driver_opts:
+#       type: none
+# #THIS NEEDS TO BE CHANGE TO THE CORRECT PATH ON THE PI
+#       device: /home/pi/AmpBackup
+#       o: bind
+
+  # maillistpicvol:
+  #   driver: local
+  #   driver_opts:
+  #     type: none
+  #     device: /home/pi/Thumbnails
+  #     o: bind
