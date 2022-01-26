@@ -51,7 +51,7 @@ class CreateMailLists:
                 # kdb.main.insert_one(foo)
                 kcursor.execute('INSERT INTO kitsap(st_no, prefix, str_name, identifier, city, state, zip, street_addr) VALUES(?, ?, ?, ?, ?, ?, ?, ?)', entries)
                 # kcursor.execute("INSERT INTO kitsap VALUES ")
-                
+                print(kcursor.lastrowid)
                 kconn.commit()
                 print("Line: {}".format(count))
         return count
@@ -81,6 +81,7 @@ class CreateMailLists:
                     else:
                         entries = (row[25], row[37])
                         mcursor.execute('INSERT INTO mason(type, str_address) VALUES(?, ?)', entries)
+                        print(mcursor.lastrowid)
                         mconn.commit()
                         bar = "item" + str(count) + ":" + row[25] + "  " + row[37]
                         print(bar)
@@ -99,6 +100,7 @@ class CreateMailLists:
                 line_array = line.strip().split("|")
                 entries = (line_array[1], line_array[3], line_array[4], line_array[5])
                 pcursor.execute('INSERT INTO pierce(catagory, str_name, str_num, type) VALUES(?, ?, ?, ?)', entries)
+                print(pcursor.lastrowid)
                 pconn.commit()
                 print(entries)
         return count
@@ -116,9 +118,9 @@ class CreateMailLists:
         
         
         c1 = self.parse_kitsap()
-        c2 = self.parse_mason()
-        c3 = self.parse_pierce()
-        zoo = c1 + c2 + c3
+        # c2 = self.parse_mason()
+        # c3 = self.parse_pierce()
+        # zoo = c1 + c2 + c3
         print(zoo)
        
 
