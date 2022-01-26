@@ -109,15 +109,22 @@ class CreateMailLists:
         if not os.path.exists("/home/Property_addresses.txt"):
             os.system("sh /home/kitsap.sh")
 
-        if not os.path.exists("/home/2021-RP-master.xlsx"):
-            os.system("sh /home/mason.sh")
-            self.convert_xlsx()
+        # if not os.path.exists("/home/2021-RP-master.xlsx"):
+        #     os.system("sh /home/mason.sh")
+        #     self.convert_xlsx()
 
-        if not os.path.exists("/home/tax_account.zip"):
-            os.system("sh /home/pierce.sh")
+        # if not os.path.exists("/home/tax_account.zip"):
+        #     os.system("sh /home/pierce.sh")
         
         
         c1 = self.parse_kitsap()
+        rows = pcursor.execute("SELECT city FROM kitsap").fetchall()
+        cityList = []
+        for row in rows:
+            cityList.append(row)
+        citylist2 = list(set(cityList))
+        print(citylist2)
+
         # c2 = self.parse_mason()
         # c3 = self.parse_pierce()
         # zoo = c1 + c2 + c3
