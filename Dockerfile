@@ -15,17 +15,18 @@ RUN \
 COPY kitsap.sh /home/
 COPY mason.sh /home/
 COPY pierce.sh /home/
-COPY readlines.py /home/
+COPY AllMailLists.py /home/
+COPY kitsapmaillists.py /home/
+COPY masonmaillists.py /home/
+COPY piercemaillists.py /home/
 
 
-RUN chmod 0655 "/home/readlines.py" && \
+RUN chmod 0655 "/home/AllMailLists.py" && \
+	chmod 0655 "/home/kitsapmaillists.py" && \
+	chmod 0655 "/home/masonmaillists.py" && \
+	chmod 0655 "/home/piercemaillists.py" && \
     chmod 0655 "/home/kitsap.sh" && \
 	chmod 0655 "/home/mason.sh" && \
 	chmod 0655 "/home/pierce.sh"
-
-# RUN /home/kitsap.sh
-# RUN /home/mason.sh
-# RUN /home/pierce.sh
-# RUN python3 /home/readlines.py
 
 CMD sh -c 'trap "exit" TERM; while true; do sleep 1; done'
