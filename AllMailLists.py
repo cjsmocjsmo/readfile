@@ -128,7 +128,7 @@ class CreateMailLists:
         # if not os.path.exists("/home/tax_account.zip"):
         #     os.system("sh /home/pierce.sh")
         
-        KML = kitsapmaillists().KitsapMailLists()
+        KML = kitsapmaillists.KitsapMailLists()
         KML.parse_kitsap()
 
 
