@@ -15,6 +15,7 @@ class MasonMailLists:
         self.cities = []
         self.row_count = []
         self.regex1 = re.compile(",")
+        self.regex2 = re.compile("/^\s+|\s+$|\s+(?=\s)/g")
 
     def split_type(self, astr):
         foo = astr.split("-")
@@ -26,7 +27,7 @@ class MasonMailLists:
             return type, catagory
 
     def split_addr(self, addr):
-        rpl_spc = addr.replace('\s\s', "\s").replace("\t", "\s")
+        rpl_spc = addr.replace(self.regex2, "")
         if re.search(self.regex1, rpl_spc) != None:
 
             addr_split = rpl_spc.split(",")
@@ -48,8 +49,8 @@ class MasonMailLists:
             return str_num, prefix, str_name, suffix, city, zipcode
         else:
             boo = rpl_spc.split("\s")
-            print(rpl_spc)
-            print(boo)
+            print("this is rpl_spc {}".format(rpl_spc))
+            print("this is boo {}".format(boo))
             return None, None, None, None, None, None
         
 
