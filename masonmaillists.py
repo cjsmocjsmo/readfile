@@ -6,7 +6,7 @@ import sqlite3
 
 mconn = sqlite3.connect("mason.db")
 mcursor = mconn.cursor()
-mcursor.execute("CREATE TABLE mason(type TEXT, catagory TEXT, str_num TEXT, prefix TEXT, str_name TEXT, suffix TEXT, city TEXT, zipcode TEXT)")
+mcursor.execute("CREATE TABLE mason(type TEXT, catagory TEXT, str_num TEXT, prefix TEXT, str_name TEXT, city TEXT, zipcode TEXT)")
 # ['', 'ALLYN', 'GRAPEVEIW', 'TAHUYA', 'ELMA', 'BREMERTON', '420', 'SHELTON', 'MCCLEARY', 'BEFAIR', 'BELFAIR', 'HOODSPORT',
 #  'HOODPSORT', 'PICKERING', 'OLYMPIA', 'MATLOCK', 'ST', "STE'S", 'GRAPEVIEW', 'HOODDSPORT', 'LILLWAUP', 'UNION', 'LILLIWAUP', 'MONTESANO']
 
@@ -31,11 +31,11 @@ class MasonMailLists:
         if re.search(self.regex1, rpl_spc) != None:
 
             addr_split = rpl_spc.split(",")
-            adr = addr_split[0].split("\s")
+            adr = addr_split[0].split("\s", 2)
             str_num = adr[0]
             prefix = adr[1]
             str_name = adr[2]
-            suffix = adr[3]
+            # suffix = adr[3]
 
             cz = addr_split[1].split("\s")
             if len(cz) > 1:
@@ -49,7 +49,7 @@ class MasonMailLists:
             else:
                 city = "None"
                 zipcode = "None"
-            return str_num, prefix, str_name, suffix, city, zipcode
+            return str_num, prefix, str_name, city, zipcode
         else:
             boo = rpl_spc.split("\s")
             d = []
@@ -73,9 +73,9 @@ class MasonMailLists:
                     except TypeError:
                         print("this is row[25] {}".format(row[25]))
                     try:
-                        str_num, prefix, str_name, suffix, city, zipcode = self.split_addr(row[37])
-                        entries = (type, catagory, str_num, prefix, str_name, suffix, city, zipcode)
-                        mcursor.execute('INSERT INTO mason(type, catagory, str_num, prefix, str_name, suffix, city, zipcode) VALUES(?, ?, ?, ?, ?, ?, ?, ?)', entries)
+                        str_num, prefix, str_name, city, zipcode = self.split_addr(row[37])
+                        entries = (type, catagory, str_num, prefix, str_name, city, zipcode)
+                        mcursor.execute('INSERT INTO mason(type, catagory, str_num, prefix, str_name, city, zipcode) VALUES(?, ?, ?, ?, ?, ?, ?)', entries)
                         print(mcursor.lastrowid)
                         mconn.commit()
                     except IndexError:
