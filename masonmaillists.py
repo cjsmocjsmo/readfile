@@ -27,7 +27,7 @@ class MasonMailLists:
             return type, catagory
 
     def split_addr(self, addr):
-        rpl_spc = addr.replace(self.regex2, "")
+        rpl_spc = addr.strip().replace("\s\s\s\s\s", "\s").replace("\s\s\s\s", "\s").replace("\s\s\s", "\s").replace("\s\s", "\s")
         if re.search(self.regex1, rpl_spc) != None:
 
             addr_split = rpl_spc.split(",")
