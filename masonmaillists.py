@@ -6,11 +6,13 @@ import sqlite3
 mconn = sqlite3.connect("mason.db")
 mcursor = mconn.cursor()
 mcursor.execute("CREATE TABLE mason(type TEXT, catagory TEXT, str_num TEXT, prefix TEXT, str_name TEXT, suffix TEXT, city TEXT, zipcode TEXT)")
-
+# ['', 'ALLYN', 'GRAPEVEIW', 'TAHUYA', 'ELMA', 'BREMERTON', '420', 'SHELTON', 'MCCLEARY', 'BEFAIR', 'BELFAIR', 'HOODSPORT',
+#  'HOODPSORT', 'PICKERING', 'OLYMPIA', 'MATLOCK', 'ST', "STE'S", 'GRAPEVIEW', 'HOODDSPORT', 'LILLWAUP', 'UNION', 'LILLIWAUP', 'MONTESANO']
 
 class MasonMailLists:
     def __init__(self):
         self.cities = []
+        self.row_count = []
 
     def split_type(self, astr):
         foo = astr.split("-")
@@ -44,7 +46,7 @@ class MasonMailLists:
                     try:
                         type, catagory = self.split_type(row[25])
                     except TypeError:
-                        print(row)
+                        print(row[25])
                     try:
                         str_num, prefix, str_name, suffix, city, zipcode = self.split_addr(row[37])
                         entries = (type, catagory, str_num, prefix, str_name, suffix, city, zipcode)
@@ -52,13 +54,15 @@ class MasonMailLists:
                         print(mcursor.lastrowid)
                         mconn.commit()
                     except IndexError:
-                        print(row)
+                        print(row[37])
                     
                     # bar = "item" + str(count) + ":" + row[25] + "  " + row[37]
                     print(str(count))
+                    self.row_count.append(len(row))
                     
             except UnicodeDecodeError:
                 print(row)
 
             print(list(set(self.cities)))
+            print(list(set(self.row_count)))
         return count
