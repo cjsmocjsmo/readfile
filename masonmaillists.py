@@ -54,7 +54,11 @@ class MasonMailLists:
             try:
                 for row in reader:
                     count += 1
-                    type, catagory = self.split_type(row[25])
+                    try:
+                        type, catagory = self.split_type(row[25])
+                    except TypeError:
+                        print(row[25])
+                    
                     try:
                         str_num, prefix, str_name, suffix, city, zipcode = self.split_addr(row[37])
                         entries = (type, catagory, str_num, prefix, str_name, suffix, city, zipcode)
