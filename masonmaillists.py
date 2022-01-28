@@ -14,10 +14,13 @@ class MasonMailLists:
 
     def split_type(self, astr):
         foo = astr.split("-")
-        print(foo)
-        type = foo[1]
-        catagory = foo[2]
-        return type, catagory
+        if len(foo) != 3:
+            pass
+        else:
+            print(foo)
+            type = foo[1]
+            catagory = foo[2]
+            return type, catagory
 
     def split_addr(self, addr):
         addr_split = addr.split(",")
