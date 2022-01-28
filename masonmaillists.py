@@ -71,7 +71,7 @@ class MasonMailLists:
                     try:
                         type, catagory = self.split_type(row[25])
                     except TypeError:
-                        print(row[25])
+                        print("this is row[25] {}".format(row[25]))
                     try:
                         str_num, prefix, str_name, suffix, city, zipcode = self.split_addr(row[37])
                         entries = (type, catagory, str_num, prefix, str_name, suffix, city, zipcode)
@@ -79,7 +79,7 @@ class MasonMailLists:
                         print(mcursor.lastrowid)
                         mconn.commit()
                     except IndexError:
-                        print(row[37])
+                        print("this is row[37] {}".format(row[37]))
                     
                     # bar = "item" + str(count) + ":" + row[25] + "  " + row[37]
                     print(str(count))
