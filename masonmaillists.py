@@ -52,11 +52,15 @@ class MasonMailLists:
                 for row in reader:
                     count += 1
                     type, catagory = self.split_type(row[25])
-                    str_num, prefix, str_name, suffix, city, zipcode = self.split_addr(row[37])
-                    entries = (type, catagory, str_num, prefix, str_name, suffix, city, zipcode)
-                    mcursor.execute('INSERT INTO mason(type, catagory, str_num, prefix, str_name, suffix, city, zipcode) VALUES(?, ?, ?, ?, ?, ?, ?, ?)', entries)
-                    print(mcursor.lastrowid)
-                    mconn.commit()
+                    try:
+                        str_num, prefix, str_name, suffix, city, zipcode = self.split_addr(row[37])
+                        entries = (type, catagory, str_num, prefix, str_name, suffix, city, zipcode)
+                        mcursor.execute('INSERT INTO mason(type, catagory, str_num, prefix, str_name, suffix, city, zipcode) VALUES(?, ?, ?, ?, ?, ?, ?, ?)', entries)
+                        print(mcursor.lastrowid)
+                        mconn.commit()
+                    except IndexError:
+                        print(row[37])
+                    
                     bar = "item" + str(count) + ":" + row[25] + "  " + row[37]
                     print(bar)
             except UnicodeDecodeError:
