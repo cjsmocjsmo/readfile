@@ -29,7 +29,7 @@ class MasonMailLists:
         rpl_spc = addr.replace('\s\s', "\s").replace("\t", "\s")
         if re.search(self.regex1, rpl_spc) != None:
 
-            addr_split = rpl_spc.split(",\s")
+            addr_split = rpl_spc.split(",")
             adr = addr_split[0].split("\s")
             str_num = adr[0]
             prefix = adr[1]
@@ -38,22 +38,24 @@ class MasonMailLists:
 
             cz = addr_split[1].split("\s")
             if len(cz) > 1:
-                city = cz[0]
-                self.cities.append(cz[0])
-                zipcode = cz[1]
+                city = cz[1]
+                self.cities.append(cz[1])
+                zipcode = cz[2]
             else:
                 city = cz[0]
                 self.cities.append(cz[0])
                 zipcode = "None"
+            return str_num, prefix, str_name, suffix, city, zipcode
         else:
             boo = rpl_spc.split("\s")
             print(rpl_spc)
             print(boo)
+            return None, None, None, None, None, None
         
 
 
         
-        return str_num, prefix, str_name, suffix, city, zipcode
+        
 
     def parse_mason(self):
         with open('/home/2021-RP-master.csv', 'r') as csv_file:
