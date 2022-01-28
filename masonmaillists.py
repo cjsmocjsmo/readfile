@@ -20,7 +20,7 @@ class MasonMailLists:
     def split_type(self, astr):
         foo = astr.split("-")
         if len(foo) != 3:
-            print(foo)
+            print("this is foo {}".format(foo))
         else:
             type = foo[1]
             catagory = foo[2]
@@ -42,21 +42,24 @@ class MasonMailLists:
                 city = cz[1]
                 self.cities.append(cz[1])
                 zipcode = cz[2]
-            else:
+            elif len(cz) == 1:
                 city = cz[0]
                 self.cities.append(cz[0])
+                zipcode = "None"
+            else:
+                city = "None"
                 zipcode = "None"
             return str_num, prefix, str_name, suffix, city, zipcode
         else:
             boo = rpl_spc.split("\s")
+            d = []
+            for b in boo:
+                c = b.strip()
+                d.append(c)
             print("this is rpl_spc {}".format(rpl_spc))
             print("this is boo {}".format(boo))
+            print("this is d {}".format(d))
             return None, None, None, None, None, None
-        
-
-
-        
-        
 
     def parse_mason(self):
         with open('/home/2021-RP-master.csv', 'r') as csv_file:
