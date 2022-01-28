@@ -10,7 +10,8 @@ RUN \
 		wget \
 		unzip \
         python3-pandas \
-        python3-openpyxl 
+        python3-openpyxl \
+		nano
 
 COPY kitsap.sh /home/
 COPY mason.sh /home/
