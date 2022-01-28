@@ -14,6 +14,7 @@ class MasonMailLists:
 
     def split_type(self, astr):
         foo = astr.split("-")
+        print(foo)
         type = foo[1]
         catagory = foo[2]
         return type, catagory
@@ -22,6 +23,7 @@ class MasonMailLists:
         addr_split = addr.split(",")
         print(addr_split)
         adr = addr_split[0].split(" ")
+        print(adr)
         try:
             str_num = adr[0]
             prefix = adr[1]
@@ -32,12 +34,13 @@ class MasonMailLists:
 
         try:
             cz = addr_split[1].split(" ")
+            print(cz)
             city = cz[0]
             zipcode = cz[1]
-            return str_num, prefix, str_name, suffix, city, zipcode
+            
         except IndexError:
             print(addr_split)
-
+        return str_num, prefix, str_name, suffix, city, zipcode
 
     def parse_mason(self):
 
