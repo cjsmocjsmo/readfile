@@ -24,22 +24,22 @@ class MasonMailLists:
         print(addr_split)
         adr = addr_split[0].split(" ")
         print(adr)
-        try:
-            str_num = adr[0]
-            prefix = adr[1]
-            str_name = adr[2]
-            suffix = adr[3]
-        except IndexError:
-            print("index error {}".format(addr_split))
+        # try:
+        str_num = adr[0]
+        prefix = adr[1]
+        str_name = adr[2]
+        suffix = adr[3]
+        # except IndexError:
+        #     print("index error {}".format(addr_split))
 
-        try:
-            cz = addr_split[1].split(" ")
-            print(cz)
-            city = cz[0]
-            zipcode = cz[1]
+        # try:
+        cz = addr_split[1].split(" ")
+        print(cz)
+        city = cz[1]
+        zipcode = cz[2]
             
-        except IndexError:
-            print(addr_split)
+        # except IndexError:
+            # print(addr_split)
         return str_num, prefix, str_name, suffix, city, zipcode
 
     def parse_mason(self):
