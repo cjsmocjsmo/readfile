@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+import re
 import csv
 import sqlite3
 
@@ -13,6 +14,7 @@ class MasonMailLists:
     def __init__(self):
         self.cities = []
         self.row_count = []
+        self.regex1 = re.compile(",")
 
     def split_type(self, astr):
         foo = astr.split("-")
@@ -24,16 +26,33 @@ class MasonMailLists:
             return type, catagory
 
     def split_addr(self, addr):
-        addr_split = addr.split(",")
-        adr = addr_split[0].split(" ")
-        str_num = adr[0]
-        prefix = adr[1]
-        str_name = adr[2]
-        suffix = adr[3]
-        cz = addr_split[1].split(" ")
-        city = cz[1]
-        self.cities.append(cz[1])
-        zipcode = cz[2]
+        rpl_spc = addr.replace('\s\s', "\s").replace("\t", "\s")
+        if re.search(self.regex1, rpl_spc) != None:
+
+            addr_split = rpl_spc.split(",\s")
+            adr = addr_split[0].split("\s")
+            str_num = adr[0]
+            prefix = adr[1]
+            str_name = adr[2]
+            suffix = adr[3]
+
+            cz = addr_split[1].split("\s")
+            if len(cz) > 1:
+                city = cz[0]
+                self.cities.append(cz[0])
+                zipcode = cz[1]
+            else:
+                city = cz[0]
+                self.cities.append(cz[0])
+                zipcode = "None"
+        else:
+            boo = rpl_spc.split("\s")
+            print(rpl_spc)
+            print(boo)
+        
+
+
+        
         return str_num, prefix, str_name, suffix, city, zipcode
 
     def parse_mason(self):
