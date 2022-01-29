@@ -42,9 +42,9 @@ class MasonMailLists:
             cz = cz1.split()
             print("this is cz {}".format(cz))
             if len(cz) > 1:
-                city = cz[1]
-                self.cities.append(cz[1])
-                zipcode = cz[2]
+                city = cz[0]
+                self.cities.append(cz[0])
+                zipcode = cz[1]
             elif len(cz) == 1:
                 city = cz[0]
                 self.cities.append(cz[0])
