@@ -15,7 +15,6 @@ class MasonMailLists:
         self.cities = []
         self.row_count = []
         self.regex1 = re.compile(",")
-        self.regex2 = re.compile("/^\s+|\s+$|\s+(?=\s)/g")
 
     def split_type(self, astr):
         foo = astr.split("-")
@@ -27,17 +26,18 @@ class MasonMailLists:
             return type, catagory
 
     def split_addr(self, addr):
-        rpl_spc = addr.strip().replace("\s\s\s\s\s", "\s").replace("\s\s\s\s", "\s").replace("\s\s\s", "\s").replace("\s\s", "\s")
+        rpl_spc = addr.replace("\s\s", "\s").strip()
         if re.search(self.regex1, rpl_spc) != None:
 
             addr_split = rpl_spc.split(",")
-            adr = addr_split[0].split("\s", 2)
+            adr = addr_split[0].strip().split("\s", 2)
+            print("this is adr {}".format(adr))
             str_num = adr[0]
             prefix = adr[1]
             str_name = adr[2]
             # suffix = adr[3]
 
-            cz = addr_split[1].split("\s")
+            cz = addr_split[1].strip().split("\s")
             if len(cz) > 1:
                 city = cz[1]
                 self.cities.append(cz[1])
@@ -59,7 +59,7 @@ class MasonMailLists:
             print("this is rpl_spc {}".format(rpl_spc))
             print("this is boo {}".format(boo))
             print("this is d {}".format(d))
-            return None, None, None, None, None, None
+            return None, None, None, None, None
 
     def parse_mason(self):
         with open('/home/2021-RP-master.csv', 'r') as csv_file:
