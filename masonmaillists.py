@@ -38,7 +38,9 @@ class MasonMailLists:
             str_name = adr[2]
             # suffix = adr[3]
 
-            cz = addr_split[1].strip().split()
+            cz1 = addr_split[1].strip()
+            cz = cz1.split()
+            print("this is cz {}".format(cz))
             if len(cz) > 1:
                 city = cz[1]
                 self.cities.append(cz[1])
