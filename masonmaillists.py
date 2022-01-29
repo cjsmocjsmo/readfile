@@ -26,18 +26,19 @@ class MasonMailLists:
             return type, catagory
 
     def split_addr(self, addr):
-        rpl_spc = addr.replace("\s\s", "\s").strip()
+        rpl_spc = addr.replace("  ", " ").strip()
         if re.search(self.regex1, rpl_spc) != None:
 
             addr_split = rpl_spc.split(",")
-            adr = addr_split[0].strip().split("\s", 2)
+            ad = addr_split[0].strip()
+            adr = ad.split(" ", 2)
             print("this is adr {}".format(adr))
             str_num = adr[0]
             prefix = adr[1]
             str_name = adr[2]
             # suffix = adr[3]
 
-            cz = addr_split[1].strip().split("\s")
+            cz = addr_split[1].strip().split()
             if len(cz) > 1:
                 city = cz[1]
                 self.cities.append(cz[1])
@@ -51,7 +52,7 @@ class MasonMailLists:
                 zipcode = "None"
             return str_num, prefix, str_name, city, zipcode
         else:
-            boo = rpl_spc.split("\s")
+            boo = rpl_spc.split()
             d = []
             for b in boo:
                 c = b.strip()
