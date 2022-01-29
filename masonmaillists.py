@@ -54,15 +54,17 @@ class MasonMailLists:
                 zipcode = "None"
             return str_num, prefix, str_name, city, zipcode
         else:
-            boo = rpl_spc.split()
-            d = []
-            for b in boo:
-                c = b.strip()
-                d.append(c)
+            boo = rpl_spc.split("  ")
+            boo1 = boo[0].split(" ", 2)
+            str_num = boo1[0]
+            prefix = boo1[1]
+            str_name = boo1[2]
+
+            city = boo[1]
+            zipcode = "None"
             print("this is rpl_spc {}".format(rpl_spc))
-            print("this is boo {}".format(boo))
-            print("this is d {}".format(d))
-            return None, None, None, None, None
+            print(str_num, prefix, str_name, city, zipcode)
+            return str_num, prefix, str_name, city, zipcode
 
     def parse_mason(self):
         with open('/home/2021-RP-master.csv', 'r') as csv_file:
