@@ -32,7 +32,6 @@ class MasonMailLists:
             addr_split = rpl_spc.split(",")
             ad = addr_split[0].strip()
             adr = ad.split(" ", 2)
-            print("this is adr {}".format(adr))
             str_num = adr[0]
             prefix = adr[1]
             str_name = adr[2]
@@ -40,7 +39,6 @@ class MasonMailLists:
 
             cz1 = addr_split[1].strip()
             cz = cz1.split()
-            print("this is cz {}".format(cz))
             if len(cz) > 1:
                 city = cz[0]
                 self.cities.append(cz[0])
@@ -55,6 +53,8 @@ class MasonMailLists:
             return str_num, prefix, str_name, city, zipcode
         else:
             boo = rpl_spc.split("  ")
+            print(boo[0])
+            print(boo[1])
             boo1 = boo[0].split(" ", 2)
             str_num = boo1[0]
             prefix = boo1[1]
@@ -84,6 +84,7 @@ class MasonMailLists:
                         print(mcursor.lastrowid)
                         mconn.commit()
                     except IndexError:
+                        print("this is row[25] {}".format(row[25]))
                         print("this is row[37] {}".format(row[37]))
                     
                     # bar = "item" + str(count) + ":" + row[25] + "  " + row[37]
