@@ -87,7 +87,7 @@ class MasonMailLists:
                         print("this is row[25] {}".format(row[25]))
                         print("this is row[37] {}".format(row[37]))
                     
-                    # bar = "item" + str(count) + ":" + row[25] + "  " + row[37]
+                    bar = "item" + str(count) + ":" + row[25] + "  " + row[37]
                     print(str(count))
                     self.row_count.append(len(row))
                     
